@@ -1,0 +1,11 @@
+body {
+  background-color: #ddd;
+}
+
+div#main {
+  width: 640px;
+  height: 480px;
+  margin: 10px auto;
+  border: 1px solid gray;
+  background-color: white;
+}
