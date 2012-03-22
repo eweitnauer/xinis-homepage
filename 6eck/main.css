@@ -1,0 +1,16 @@
+body {
+  margin: 10px;
+  background: url(../imgs/hexellence.png);
+}
+
+div#foreground {
+  position: absolute;
+  left: 100px;
+  top: 100px;
+  z-index: 20;
+}
+
+svg {
+  border: 2px solid gray;  
+  z-index: 10;
+}
