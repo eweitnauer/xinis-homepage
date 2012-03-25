@@ -14,3 +14,15 @@ svg {
   border: 2px solid gray;  
   z-index: 10;
 }
+
+g.hexagon text {
+  font-size: 18px;
+}
+
+g.hexagon polygon {
+  fill: black;
+}
+
+g.hexagon polygon:hover {
+  fill: red;
+}
