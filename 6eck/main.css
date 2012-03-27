@@ -20,10 +20,14 @@ g.hexagon text {
   font-size: 18px;
 }
 
-g.hexagon polygon.main {
+g.hexagon polygon {
   fill: black;
 }
 
-g.hexagon polygon.main:hover {
+g.hexagon polygon:hover {
+  stroke: red;
+}
+
+g.hexagon polygon.selected {
   fill: red;
 }
