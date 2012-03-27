@@ -13,5 +13,5 @@ function hexagon(a, x, y) {
 }
 
 function transform(scale, dx, dy) {
-  return "translate(" + dx + "," + dy + ") scale(" + scale + ")";
+  return "translate(" + dx + "," + dy + ")" + (scale == 1 ? "" : "scale(" + scale + ")");
 }

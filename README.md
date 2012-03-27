@@ -1,3 +1,5 @@
-# Floating Rectangles -- Techdemo
+# Homepage for Xinrui Song
 
-Erik Weitnauer, 2012.
+Based on svgs and the d3 lib.
+
+Erik Weitnauer and Xinrui Song, 2012.
