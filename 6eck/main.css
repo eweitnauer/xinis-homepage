@@ -17,17 +17,29 @@ svg {
 }
 
 g.hexagon text {
-  font-size: 18px;
+  font-size: 16px;
+  font-family: sans;
+  fill: white;
+  alignment-baseline: middle;
+  text-anchor: middle;
 }
 
 g.hexagon polygon {
-  fill: black;
+  fill: gray;
+  fill-opacity: 0.8;
+  stroke: none;
+}
+
+g.hexagon polygon.sub {
+  stroke: black;
+  stroke-width: 1px;
 }
 
 g.hexagon polygon:hover {
-  stroke: red;
+  stroke: black;
+  stroke-width: 2px;
 }
 
 g.hexagon polygon.selected {
-  fill: red;
+  fill: black;
 }

@@ -59,6 +59,10 @@ function get_permutation(N) {
   return a;
 }
 
+function randomInt(x0, x1) {
+  return Math.floor(x0+Math.random()*(x1-x0));
+}
+
 /// Call with svg element as this. Will make the element rotate back and forth
 /// between -angle and angle degrees.
 function wiggle_element(angle) {
@@ -79,7 +83,7 @@ function float_element(dist) {
   return function() {
     d3.select(this).transition()
         .ease("linear")
-        .duration(500+Math.random()*100)
+        .duration(1000+Math.random()*100)
         .attr("transform", transform(1, Math.random()*2*dist-dist, Math.random()*2*dist-dist))
         .each("end", float_element(dist));
   };
@@ -88,13 +92,13 @@ function float_element(dist) {
 /// Starts / stops floating and sets d.floating attribute for all ".floating"
 /// elements in the svg. When stopping the floating, the elements are moved
 /// back to 0,0 in duration ms.
-function setFloating(do_float, duration) {
+function setFloating(selection, do_float, duration) {
   if (do_float) {
-    d3.selectAll("svg .floating")
+    selection
       .each(function(d) { d.floating = true; })
       .each(float_element());
   } else {
-    d3.selectAll("svg .floating")
+    selection
       .each(function(d) { d.floating = false; })
       .transition()
       .duration(duration)
