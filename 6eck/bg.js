@@ -23,10 +23,25 @@ function init_background() {
       .attr("stop-color", "#aaa")
       .attr("stop-opacity", 1);
   
-  addCircles(20);
+  //addCircles(10);
   
   addBars(15, 15);
 }
+    
+//function add_image_patterns() {
+//  var patt = svg.select("defs")
+//    .append("svg:pattern")
+//    .attr("id", "img1")
+//    .attr("patternUnits", "userSpaceOnUse")
+//    .attr("width", 155)
+//    .attr("height", 135);
+//  patt.append("svg:image")
+//      .attr("xlink:href", "imgs/grafik_klein.png")
+//      .attr("x", 0)
+//      .attr("y", 0)
+//      .attr("width", 155)
+//      .attr("height", 135);
+//}
 
 function addCircles(N) {
   var rmin = 5, rmax = 100;

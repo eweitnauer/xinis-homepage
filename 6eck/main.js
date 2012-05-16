@@ -23,22 +23,22 @@ function init() {
   init_background();
   
   svg.append("g")
-    .attr("class", "main");
+    .classed("main", true);
     
   var glinks = svg.select("g.main")
     .selectAll("g.hexagon")
     .data(hexes, function(d) { return d.label; })
     .enter()
     .append("g")
-    .attr("class", "hexagon")
+    .classed("hexagon", true)
     .append("g")
-    .attr("class", "floating")
+    .classed("floating", true)
     .on("mouseover", function() {d3.select(this).transition().duration(0);})
     .on("mouseout", function(d) { if (d.floating) d3.select(this).each(float_element())})
     .on("click", clicked_main);
     
   glinks.append("polygon")
-   .attr("class", "main")
+   .classed("main", true)
    .attr("points", function(d) { return hexagon(a, 0, 0); });
 
   glinks.append("text")
@@ -67,23 +67,55 @@ function move_to_left(duration) {
   setFloating(d3.selectAll("svg .floating"), false, duration);
 }
 
+function clicked_sub(d) {
+  // was the already selected hexagon clicked?
+  if (d.selected) {
+    // yes, so deselect it and hide content area
+    d.selected = false;
+    d3.select(this).select("polygon").classed("selected", "false");
+    return;
+  }
+  
+  // a new hexagon was clicked!
+  // select new one...
+  var hexes = d3.selectAll('g.hexagon').data();
+  for (var i=4; i<hexes.length; i++) hexes[i].selected = false;
+  d.selected = true;
+  d3.selectAll("polygon")
+    .classed("selected", function(d) { return d.selected});
+  // set its index to 4...
+  if (d.i != 4) {
+    for (var i=4; i<hexes.length; i++) {
+      if (hexes[i].i == 4) {
+        hexes[i].i = d.i;
+        d.i = 4;
+        break;
+      }
+    }
+    position_hexagons(1000);
+  }
+  // show content area
+  //setTimeout(function() { update_inner_links(d) }, 1000);  
+}
+
 function clicked_main(d) {
   // was the already selected hexagon clicked?
   if (d.selected) {
     // yes, so deselect it and move all hexagons back to center
-    update_inner_links();
+    // hide inner links
+    update_inner_links(null);
     d.selected = false;
-    d3.select(this).select("polygon").attr("class", "");
+    d3.select(this).select("polygon").classed("selected", false);
     move_to_center(1000);
     return;
   }
   
   // a new hexagon was clicked!
   // select new one...
-  for (var i=0; i<hexes.length; i++) hexes[i].selected = false;
+  for (var i=0; i<4; i++) hexes[i].selected = false;
   d.selected = true;
   d3.selectAll("polygon")
-    .attr("class", function(d) { return d.selected ? "selected" : "" });
+    .classed("selected", function(d) { return d.selected});
   // set its index to 0...
   if (d.i != 0) {
     for (var i=0; i<hexes.length; i++) {
@@ -109,18 +141,26 @@ function update_inner_links(d) {
   
   var hse = hs.enter()
     .insert("g", "g.hexagon")
-    .attr("class", "hexagon")
+    .classed("hexagon", true)
     .attr("transform", transform(1, pos[0], pos[1]))
     .append("g")
-    .attr("class", "floating")
+    .classed("floating", true)
     .on("mouseover", function() {d3.select(this).transition().duration(0);})
     .on("mouseout", function(d) {if (d.floating) d3.select(this).each(float_element())})
-//    .on("click", clicked_sub);
+    .on("click", clicked_sub);
 
   setFloating(hse, false);
-    
+  
+  hse.append("image")
+    .attr("xlink:href", "imgs/grafik_klein.png")
+    .attr("transform", "scale(0.9,0.9)")
+    .attr("x", -155/2)
+    .attr("y", -135/2)
+    .attr("width", 155)
+    .attr("height", 135);
+
   hse.append("polygon")
-   .attr("class", "sub")
+   .classed("sub", true)
    .attr("points", function(d) { return hexagon(a, 0, 0); });
 
   hse.append("text")

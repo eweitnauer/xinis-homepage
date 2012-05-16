@@ -25,21 +25,25 @@ g.hexagon text {
 }
 
 g.hexagon polygon {
-  fill: gray;
+  fill: #888;
   fill-opacity: 0.8;
   stroke: none;
 }
 
 g.hexagon polygon.sub {
-  stroke: black;
-  stroke-width: 1px;
+  fill-opacity: 0;
+  stroke: gray;
+  stroke-width: 3;
 }
 
 g.hexagon polygon:hover {
-  stroke: black;
-  stroke-width: 2px;
+  fill: #444;
 }
 
 g.hexagon polygon.selected {
-  fill: black;
+  fill: #444;
+}
+
+g.hexagon polygon.selected:hover {
+  fill: #888;
 }
