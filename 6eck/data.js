@@ -1,50 +1,66 @@
 function loadData() {
-  var data = [{i: 0, label: "Illustrationen", children:
-       [{i: 4, label: "I1"}
-       ,{i: 5, label: "I2"}
-       ,{i: 6, label: "I3"}
-       ,{i: 7, label: "I4"}
-       ,{i: 8, label: "I5"}
-       ,{i: 9, label: "I6"}
-       ,{i: 10, label: "I7"}
-       ,{i: 11, label: "I8"}
-       ,{i: 12, label: "I9"}
-       ]
-     },
-     {i: 1, label: "Kunst", children:
-       [{i: 4, label: "K1"}
-       ,{i: 5, label: "K2"}
-       ,{i: 6, label: "K3"}
-       ,{i: 7, label: "K4"}
-       ]
-     },
-     {i: 2, label: "Logos", children:
-       [{i: 4, label: "L1"}
-       ,{i: 5, label: "L2"}
-       ,{i: 6, label: "L3"}
-       ,{i: 7, label: "L4"}
-       ,{i: 8, label: "L5"}
-       ,{i: 9, label: "L6"}]
-     },
-     {i: 3, label: "Kataloge", children:
-       [{i: 4, label: "K1"}]
-     }];
-     
-//  addLevel(data, 0);
-//  addI(data, 0);
+  var data = 
+  [{label: "Grafik",
+    path: "grafik",
+    count: 9
+   }
+  ,{label: "Fotografie",
+    path: "fotografie",
+    count: 6
+   }
+  ,{label: "Malerei",
+    path: "malerei",
+    count: 4
+   }
+   ,{label: "Medien",
+     path: "medien",
+     count: 7
+   }
+   ,{label: "Medien2",
+     path: "medien",
+     count: 7
+   }
+   ,{label: "Medien3",
+     path: "medien",
+     count: 7
+   }];
+  
+  addChildren(data);
+  addId(data);
+  addI(data);
+  addKind(data);
   return data;
 }
 
-function addI(data, start_at) {
+function addChildren(data) {
   for (var i=0; i<data.length; i++) {
-    data[0].i = start_at+i;
-    if (data.children) addI(data.children, start_at+data.length);
+    data[i].children = [];
+    for (var j=1; j<=data[i].count; j++) {
+      data[i].children.push({image: data[i].path+'/'+j+".png"});
+    }
   }
 }
 
-function addLevel(data, lvl) {
+var id_counter = 0;
+function addId(data) {
   for (var i=0; i<data.length; i++) {
-    data[i].css_class = 'level' + lvl;
-    if (data.children) addLevel(data.children, lvl+1);
+    data[i].id = id_counter++;
+    if (data[i].children) addId(data[i].children);
+  }
+}
+
+function addI(data, start_at) {
+  if (typeof(start_at) === 'undefined') start_at = 0;
+  for (var i=0; i<data.length; i++) {
+    data[i].i = start_at+i;
+    if (data[i].children) addI(data[i].children, data.length);
+  }
+}
+
+function addKind(data, lvl) {
+  if (typeof(lvl) === 'undefined') lvl = 0;
+  for (var i=0; i<data.length; i++) {
+    data[i].kind = ['main', 'sub'][lvl];
+    if (data[i].children) addKind(data[i].children, lvl+1);
   }
 }

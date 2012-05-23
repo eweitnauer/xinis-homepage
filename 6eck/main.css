@@ -32,8 +32,7 @@ g.hexagon polygon {
 
 g.hexagon polygon.sub {
   fill-opacity: 0;
-  stroke: gray;
-  stroke-width: 3;
+  stroke: none;
 }
 
 g.hexagon polygon:hover {

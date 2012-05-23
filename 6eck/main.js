@@ -6,11 +6,18 @@
 3b.                    auf nicht ausgewaehltes: markierung wechselt, 6eck nach rechts
 */
 
-var hexes = loadData();
 var svg;
 var scaling = 0.8;
 var w, h;
 var t=Date.now();
+var state; // 0..main links at center,
+           // 1..sub links expanded,
+           // 2..content displayed
+var active_main_node = null;
+var active_sub_node = null;
+var main_links = loadData();
+var sub_links = null;
+var content = null;
 
 function init() {
   w = 1200;
@@ -25,154 +32,165 @@ function init() {
   svg.append("g")
     .classed("main", true);
     
-  var glinks = svg.select("g.main")
+  var main = svg.select("g.main")
     .selectAll("g.hexagon")
-    .data(hexes, function(d) { return d.label; })
+    .data(main_links, function(d) { return d.id; })
     .enter()
     .append("g")
     .classed("hexagon", true)
-    .append("g")
-    .classed("floating", true)
-    .on("mouseover", function() {d3.select(this).transition().duration(0);})
-    .on("mouseout", function(d) { if (d.floating) d3.select(this).each(float_element())})
     .on("click", clicked_main);
     
-  glinks.append("polygon")
+  main.append("polygon")
    .classed("main", true)
    .attr("points", function(d) { return hexagon(a, 0, 0); });
 
-  glinks.append("text")
+  main.append("text")
    .text(function(d) { return d.label; });
-
-  move_to_center(0);
-  position_hexagons(0, a+gap);
-  setFloating(d3.selectAll("svg .floating"), false);
+  
+  state = 0;
+  transition_to(0, true);
 }
 
-function move_to_center(duration) {
+function move_to_center(duration, callback) {
+  var cb = new OnlyFirst(callback);
   svg.select("g.main")
     .transition()
     .duration(duration)
-    .attr("transform", transform(1,w/2,(h-ah-gap)/2));
-  // start floating
-  setFloating(d3.selectAll("svg .floating"), false);
+    .attr("transform", transform(1,w/2,(h-2*ah-2*gap)/2))
+    .each("end", cb.f);
 }
 
-function move_to_left(duration) {
+function move_to_left(duration, callback) {
+  var cb = new OnlyFirst(callback);
   d3.select("g.main")
     .transition()
     .duration(duration)
-    .attr("transform", transform(scaling, scaling*(3*a+gap), (h-ah-gap)/2));
-  // stop floating
-  setFloating(d3.selectAll("svg .floating"), false, duration);
+    .attr("transform", transform(scaling, scaling*(3*a+gap), (h-ah-gap)/2))
+    .each("end", cb.f);
 }
 
 function clicked_sub(d) {
-  // was the already selected hexagon clicked?
-  if (d.selected) {
-    // yes, so deselect it and hide content area
-    d.selected = false;
-    d3.select(this).select("polygon").classed("selected", "false");
-    return;
+ if (d.selected) {
+    // the currently selected sub link was clicked
+    active_sub_node = null;
+    transition_to(1);
+  } else {
+    // a currently not selected sub link was clicked
+    active_sub_node = this;
+    transition_to(2);
   }
-  
-  // a new hexagon was clicked!
-  // select new one...
-  var hexes = d3.selectAll('g.hexagon').data();
-  for (var i=4; i<hexes.length; i++) hexes[i].selected = false;
-  d.selected = true;
-  d3.selectAll("polygon")
-    .classed("selected", function(d) { return d.selected});
-  // set its index to 4...
-  if (d.i != 4) {
-    for (var i=4; i<hexes.length; i++) {
-      if (hexes[i].i == 4) {
-        hexes[i].i = d.i;
-        d.i = 4;
-        break;
-      }
-    }
-    position_hexagons(1000);
-  }
-  // show content area
-  //setTimeout(function() { update_inner_links(d) }, 1000);  
 }
 
 function clicked_main(d) {
-  // was the already selected hexagon clicked?
   if (d.selected) {
-    // yes, so deselect it and move all hexagons back to center
-    // hide inner links
-    update_inner_links(null);
-    d.selected = false;
-    d3.select(this).select("polygon").classed("selected", false);
-    move_to_center(1000);
-    return;
+    // the currently selected main link was clicked
+    active_main_node = null;
+    transition_to(0);
   }
-  
-  // a new hexagon was clicked!
-  // select new one...
-  for (var i=0; i<4; i++) hexes[i].selected = false;
-  d.selected = true;
+  else {
+    // a currently not selected main link was clicked
+    active_main_node = this;
+    transition_to(1);
+  }
+}
+
+function updateSelection() {
   d3.selectAll("polygon")
     .classed("selected", function(d) { return d.selected});
-  // set its index to 0...
-  if (d.i != 0) {
-    for (var i=0; i<hexes.length; i++) {
-      if (hexes[i].i == 0) {
-        hexes[i].i = d.i;
+}
+
+function transition_to(new_state, immediately, callback) {
+  var dur = immediately ? 0 : 1000; 
+  var cb = new OnlyFirst(callback);
+  
+  if (new_state == 0) {
+    // deselect every main link
+    for (var i=0; i<main_links.length; i++) main_links[i].selected = false;
+    updateSelection();
+    sub_links = null;
+    if (state != 0) {
+      // remove sub links (don't call position_hexagons, otherwise remove will be cancled)
+      update_sub(sub_links, dur, function() {console.log('hi');move_to_center(dur, cb.f)});
+    } else {
+      position_hexagons(dur);
+      move_to_center(dur, cb.f);
+    }
+    state = 0;
+  }
+  else if (new_state == 1) {
+    if (!active_main_node) throw "'active_main_node' link must be set to transition to state 1";
+    var d = d3.select(active_main_node).data()[0];
+    sub_links = d.children;
+    // select the new main link
+    for (var i=0; i<main_links.length; i++) main_links[i].selected = false;
+    d.selected = true;
+    updateSelection();
+    // set its index to 0
+    if (d.i != 0) for (var i=0; i<main_links.length; i++) {
+      if (main_links[i].i == 0) {
+        main_links[i].i = d.i;
         d.i = 0;
         break;
       }
     }
-    position_hexagons(1000);
+    position_hexagons(dur);
+    move_to_left(dur, function() { update_sub(sub_links, dur, cb.f);});
+    state = 1;
   }
-  // and move all hexagons to the left
-  move_to_left(1000);
-  setTimeout(function() { update_inner_links(d) }, 1000);
+  else if (new_state == 2) {
+    if (!active_sub_node) throw "'active_sub_node' link must be set to transition to state 1";
+    var d = d3.select(active_sub_node).data()[0];
+    content = d.content;
+    // select the new sub link
+    for (var i=0; i<sub_links.length; i++) sub_links[i].selected = false;
+    d.selected = true;
+    updateSelection();
+    // set its index to main_links.length
+    var sidx = main_links.length;
+    if (d.i != sidx) for (var i=0; i<sub_links.length; i++) {
+      if (sub_links[i].i == sidx) {
+        sub_links[i].i = d.i;
+        d.i = sidx;
+        break;
+      }
+    }
+    position_hexagons(dur);
+    state = 2;
+  }
 }
 
-function update_inner_links(d) {
-  var children = d && d.children ? d.children : [];
-  var hs = d3.select("svg g.main").selectAll("g.hexagon")
-    .data(hexes.concat(children), function(d) {return d.label});
+function update_sub(links, dur, callback) {
+  links = links || [];
+  var cb = new OnlyFirst(callback);
+  var hexes = d3.select("svg g.main").selectAll("g.hexagon")
+    .data(main_links.concat(links), function(d) {return d.id});
 
   var pos = hexpos(a+gap, places[0]);
   
-  var hse = hs.enter()
+  var hexes_enter = hexes.enter()
     .insert("g", "g.hexagon")
     .classed("hexagon", true)
     .attr("transform", transform(1, pos[0], pos[1]))
-    .append("g")
-    .classed("floating", true)
-    .on("mouseover", function() {d3.select(this).transition().duration(0);})
-    .on("mouseout", function(d) {if (d.floating) d3.select(this).each(float_element())})
     .on("click", clicked_sub);
 
-  setFloating(hse, false);
-  
-  hse.append("image")
-    .attr("xlink:href", "imgs/grafik_klein.png")
+  hexes_enter.append("polygon")
+   .classed("sub", true)
+   .attr("points", function(d) { return hexagon(a, 0, 0); });
+ 
+  hexes_enter.append("image")
+    .attr("xlink:href", function(d) { return "imgs/" + d.image})
     .attr("transform", "scale(0.9,0.9)")
     .attr("x", -155/2)
     .attr("y", -135/2)
     .attr("width", 155)
     .attr("height", 135);
 
-  hse.append("polygon")
-   .classed("sub", true)
-   .attr("points", function(d) { return hexagon(a, 0, 0); });
-
-  hse.append("text")
-   .attr("alignment-baseline", "middle")
-   .attr("text-anchor", "middle")
-   .text(function(d) { return d.label; });
-
-  position_hexagons(1000, a+gap);
+  position_hexagons(dur, cb.f);
   
-  hs.exit()
+  hexes.exit()
     .transition()
-    .duration(1000)
+    .duration(dur)
     .attr("transform", transform(1, pos[0], pos[1]))
-    .remove();
+    .remove()
+    .each("end", cb.f);
 }
