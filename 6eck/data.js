@@ -15,14 +15,6 @@ function loadData() {
    ,{label: "Medien",
      path: "medien",
      count: 7
-   }
-   ,{label: "Medien2",
-     path: "medien",
-     count: 7
-   }
-   ,{label: "Medien3",
-     path: "medien",
-     count: 7
    }];
   
   addChildren(data);

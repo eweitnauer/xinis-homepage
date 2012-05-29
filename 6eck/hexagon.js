@@ -2,9 +2,7 @@ var a = 70, ah = a*Math.sqrt(3),
     gap = a*0.1;
 
 /// positions in hexagon grid
-//var places = [[1,0], [0,1], [-1,0], [0,0], [3,0], [2,0], [2,1], [3,-1], [3,1], [2,-1], [2,2], [3,-2], [3,2]];
-
-var places = [[0,0], [1,0], [1,1], [0,2], [-1,1], [-1,0], [3,0], [2,0], [2,1], [3,-1], [3,1], [2,-1], [2,2], [3,-2],[3,2]];
+var places = [[1,0], [0,1], [-1,0], [0,0], [3,0], [2,0], [2,1], [3,-1], [3,1], [2,-1], [2,2], [3,-2], [3,2]];
 
 /// Gibt die Punkte eines Sechsecks zurueck als "x0,y0 x1,y1 ..."
 function hexagon(a, x, y) {
@@ -17,6 +15,18 @@ function hexagon(a, x, y) {
     pts[i][1] = pts[i][1]*a + y;
   }
   for (var i=0; i<6; i++) pts[i] = pts[i].join(",");
+  return pts.join(" ");
+}
+
+/// Gibt die Punkte der Content-Area zurueck als "x0,y0 x1,y1 ..."
+function content_shape(a, w) {
+  var w3 = Math.sqrt(3);
+  var pts = [[-1,0], [0.5,1.5*w3], [w-1, 1.5*w3], [w-1,-1.5*w3],[0.5, -1.5*w3]];
+  for (var i=0; i<pts.length; i++) {
+    pts[i][0] = pts[i][0]*a;
+    pts[i][1] = pts[i][1]*a;
+  }
+  for (var i=0; i<pts.length; i++) pts[i] = pts[i].join(",");
   return pts.join(" ");
 }
 
@@ -40,14 +50,16 @@ function hexpos(a, ipos) {
 /// Moves all "g.hexagon" in the svg to the position according to their d.i.
 /// places must be an array of [x,y] arrays and is used to map the d.i values to
 /// positions in the hexagon structure.
-function position_hexagons(duration) {
+function position_hexagons(duration, callback) {
+  var cb = new OnlyFirst(callback);
   d3.selectAll("svg g.hexagon")
     .transition()
     .duration(duration)
     .attr("transform", function(d) {
       var pos = hexpos(a+gap, places[d.i]);
       return transform(1, pos[0], pos[1]);
-    });
+    })
+    .each('end', cb.f);
 }
 
 /// Returns a random permutation of 0...N-1.

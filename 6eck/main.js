@@ -56,7 +56,7 @@ function move_to_center(duration, callback) {
   svg.select("g.main")
     .transition()
     .duration(duration)
-    .attr("transform", transform(1,w/2,(h-2*ah-2*gap)/2))
+    .attr("transform", transform(1,w/2,(h-ah+2*gap)/2))
     .each("end", cb.f);
 }
 
@@ -65,7 +65,7 @@ function move_to_left(duration, callback) {
   d3.select("g.main")
     .transition()
     .duration(duration)
-    .attr("transform", transform(scaling, scaling*(3*a+gap), (h-ah-gap)/2))
+    .attr("transform", transform(scaling, scaling*(3*a+gap), (h-ah+2*gap)/2))
     .each("end", cb.f);
 }
 
@@ -108,9 +108,10 @@ function transition_to(new_state, immediately, callback) {
     for (var i=0; i<main_links.length; i++) main_links[i].selected = false;
     updateSelection();
     sub_links = null;
+    content = null;
     if (state != 0) {
       // remove sub links (don't call position_hexagons, otherwise remove will be cancled)
-      update_sub(sub_links, dur, function() {console.log('hi');move_to_center(dur, cb.f)});
+      update_sub(sub_links, dur, function() {move_to_center(dur, cb.f)});
     } else {
       position_hexagons(dur);
       move_to_center(dur, cb.f);
@@ -121,6 +122,7 @@ function transition_to(new_state, immediately, callback) {
     if (!active_main_node) throw "'active_main_node' link must be set to transition to state 1";
     var d = d3.select(active_main_node).data()[0];
     sub_links = d.children;
+    content = 0;
     // select the new main link
     for (var i=0; i<main_links.length; i++) main_links[i].selected = false;
     d.selected = true;
@@ -140,7 +142,7 @@ function transition_to(new_state, immediately, callback) {
   else if (new_state == 2) {
     if (!active_sub_node) throw "'active_sub_node' link must be set to transition to state 1";
     var d = d3.select(active_sub_node).data()[0];
-    content = d.content;
+    content = ['test']// TODO: d.content;
     // select the new sub link
     for (var i=0; i<sub_links.length; i++) sub_links[i].selected = false;
     d.selected = true;
@@ -154,9 +156,23 @@ function transition_to(new_state, immediately, callback) {
         break;
       }
     }
-    position_hexagons(dur);
+    position_hexagons(dur, function() { update_content(content, dur, cb.f); });
     state = 2;
   }
+}
+
+function update_content(content, dur, callback) {
+  var content = content || [];
+  var cb = callback instanceof OnlyFirst ? callback : new OnlyFirst(callback);
+  var elem = d3.select("svg g.main").selectAll("polygon.content")
+    .data(content);
+  var x = hexpos(a+gap,[4,0])[0]+gap;
+  var y = hexpos(a+gap,[4,0])[1];
+  var elem_enter = elem.enter()
+    .insert("polygon")
+    .classed("content", true)
+    .attr("transform", transform(1, x, y))
+    .attr("points", function(d) { return content_shape(a+gap, 9); });
 }
 
 function update_sub(links, dur, callback) {
