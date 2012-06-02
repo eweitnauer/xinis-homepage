@@ -166,8 +166,8 @@ function update_content(content, dur, callback) {
   var cb = callback instanceof OnlyFirst ? callback : new OnlyFirst(callback);
   var elem = d3.select("svg g.main").selectAll("polygon.content")
     .data(content);
-  var x = hexpos(a+gap,[4,0])[0]+gap;
-  var y = hexpos(a+gap,[4,0])[1];
+  var x = hexpos(a+gap,[5,0])[0]-a;
+  var y = hexpos(a+gap,[5,0])[1];
   var elem_enter = elem.enter()
     .insert("polygon")
     .classed("content", true)

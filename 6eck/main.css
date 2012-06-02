@@ -17,8 +17,8 @@ svg {
 }
 
 polygon.content {
-  fill: none;
-  stroke: black;
+  fill: white;
+  stroke: gray;
 }
 
 g.hexagon text {
