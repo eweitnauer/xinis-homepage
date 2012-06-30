@@ -7,7 +7,7 @@
 */
 
 var svg;
-var scaling = 0.8;
+var scaling = 1.2;
 var w, h;
 var t=Date.now();
 var state; // 0..main links at center,
@@ -56,7 +56,7 @@ function move_to_center(duration, callback) {
   svg.select("g.main")
     .transition()
     .duration(duration)
-    .attr("transform", transform(1,w/2,(h-ah+2*gap)/2))
+    .attr("transform", transform(scaling,w/2,(h-ah+2*gap)/2))
     .each("end", cb.f);
 }
 
@@ -65,7 +65,7 @@ function move_to_left(duration, callback) {
   d3.select("g.main")
     .transition()
     .duration(duration)
-    .attr("transform", transform(scaling, scaling*(3*a+gap), (h-ah+2*gap)/2))
+    .attr("transform", transform(1, (2.5*(a+gap))+100, (h-ah+2*gap)/2))
     .each("end", cb.f);
 }
 
@@ -140,9 +140,9 @@ function transition_to(new_state, immediately, callback) {
     state = 1;
   }
   else if (new_state == 2) {
-    if (!active_sub_node) throw "'active_sub_node' link must be set to transition to state 1";
+    if (!active_sub_node) throw "'active_sub_node' link must be set to transition to state 2";
     var d = d3.select(active_sub_node).data()[0];
-    content = ['test']// TODO: d.content;
+    content = [d.content];
     // select the new sub link
     for (var i=0; i<sub_links.length; i++) sub_links[i].selected = false;
     d.selected = true;
@@ -164,15 +164,38 @@ function transition_to(new_state, immediately, callback) {
 function update_content(content, dur, callback) {
   var content = content || [];
   var cb = callback instanceof OnlyFirst ? callback : new OnlyFirst(callback);
-  var elem = d3.select("svg g.main").selectAll("polygon.content")
+  var elem = d3.select("svg g.main").selectAll("g.content")
     .data(content);
   var x = hexpos(a+gap,[5,0])[0]-a;
   var y = hexpos(a+gap,[5,0])[1];
   var elem_enter = elem.enter()
-    .insert("polygon")
+    .insert("g", "g.content")
     .classed("content", true)
     .attr("transform", transform(1, x, y))
-    .attr("points", function(d) { return content_shape(a+gap, 9); });
+    .attr("opacity", 0);
+
+  elem_enter.transition()
+    .duration(dur)
+    .attr("opacity", 1)
+    .each("end", cb.f);
+  elem_enter.append("polygon")
+    .classed("content", true)
+    .attr("points", function(d) { return content_shape(a+gap/2, 10); });
+  elem_enter.append("image")
+    .attr("x", -a+2)
+    .attr("y", -274/2)
+    .attr("width", 467)
+    .attr("height", 275);
+
+  elem.select("image")
+    .attr("xlink:href", function(d) { return "imgs/" + d })
+  
+  elem.exit()
+    .transition()
+    .duration(dur)
+    .attr("opacity", 0)
+    .remove()
+    .each("end", cb.f);
 }
 
 function update_sub(links, dur, callback) {
@@ -195,11 +218,10 @@ function update_sub(links, dur, callback) {
  
   hexes_enter.append("image")
     .attr("xlink:href", function(d) { return "imgs/" + d.image})
-    .attr("transform", "scale(0.9,0.9)")
-    .attr("x", -155/2)
-    .attr("y", -135/2)
-    .attr("width", 155)
-    .attr("height", 135);
+    .attr("x", -a)
+    .attr("y", -ah/2)
+    .attr("width", 2*a)
+    .attr("height", ah);
 
   position_hexagons(dur, cb.f);
   

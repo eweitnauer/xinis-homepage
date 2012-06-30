@@ -28,7 +28,7 @@ function addChildren(data) {
   for (var i=0; i<data.length; i++) {
     data[i].children = [];
     for (var j=1; j<=data[i].count; j++) {
-      data[i].children.push({image: data[i].path+'/'+j+".png"});
+      data[i].children.push({image: data[i].path+'/'+j+".png", content: data[i].path+'/'+j+"_big.png"});
     }
   }
 }

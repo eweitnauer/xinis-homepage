@@ -17,12 +17,12 @@ svg {
 }
 
 polygon.content {
-  fill: white;
+  fill: none;
   stroke: gray;
 }
 
 g.hexagon text {
-  font-size: 16px;
+  font-size: 13px;
   font-family: sans;
   fill: white;
   alignment-baseline: middle;

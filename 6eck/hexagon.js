@@ -1,5 +1,6 @@
-var a = 70, ah = a*Math.sqrt(3),
-    gap = a*0.1;
+var a = 51 
+   ,ah = a*Math.sqrt(3)
+   ,gap = a*0.1;
 
 /// positions in hexagon grid
 var places = [[1,0], [0,1], [-1,0], [0,0], [3,0], [2,0], [2,1], [3,-1], [3,1], [2,-1], [2,2], [3,-2], [3,2]];
