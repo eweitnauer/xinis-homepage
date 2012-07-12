@@ -1,20 +1,16 @@
 function loadData() {
   var data = 
-  [{label: "Grafik",
-    path: "grafik",
-    count: 9
+  [{label: "Kunst+Foto",
+    children: ['kunst/f1.png', 'kunst/f2.png', 'kunst/f3.png','kunst/f4.png', 'kunst/k1.png', 'kunst/k2.png', 'kunst/k3.png','kunst/k4.png']
    }
-  ,{label: "Fotografie",
-    path: "fotografie",
-    count: 6
+  ,{label: "Grafik",
+    children: ['grafik/g1.png', 'grafik/g2.png', 'grafik/g3.png', 'grafik/g4.png']
    }
-  ,{label: "Malerei",
-    path: "malerei",
-    count: 4
+  ,{label: "Illustration",
+    children: ['illustration/1.png', 'illustration/2.png', 'illustration/3.png', 'illustration/4.png', 'illustration/5.png', ]
    }
    ,{label: "Medien",
-     path: "medien",
-     count: 7
+     children: ['medien/1.png', 'medien/2.png', 'medien/3.png', 'medien/4.png', 'medien/5.png', 'medien/6.png']
    }];
   
   addChildren(data);
@@ -26,9 +22,8 @@ function loadData() {
 
 function addChildren(data) {
   for (var i=0; i<data.length; i++) {
-    data[i].children = [];
-    for (var j=1; j<=data[i].count; j++) {
-      data[i].children.push({image: data[i].path+'/'+j+".png", content: data[i].path+'/'+j+"_big.png"});
+    for (var j=0; j<data[i].children.length; j++) {
+      data[i].children[j] = {img: data[i].children[j]};
     }
   }
 }

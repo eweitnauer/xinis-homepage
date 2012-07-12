@@ -109,6 +109,7 @@ function transition_to(new_state, immediately, callback) {
     updateSelection();
     sub_links = null;
     content = null;
+    if (state == 2) { update_content(content, dur, cb.f); }
     if (state != 0) {
       // remove sub links (don't call position_hexagons, otherwise remove will be cancled)
       update_sub(sub_links, dur, function() {move_to_center(dur, cb.f)});
@@ -122,7 +123,8 @@ function transition_to(new_state, immediately, callback) {
     if (!active_main_node) throw "'active_main_node' link must be set to transition to state 1";
     var d = d3.select(active_main_node).data()[0];
     sub_links = d.children;
-    content = 0;
+    content = null;
+    if (state == 2) { update_content(null, dur, cb.f); }
     // select the new main link
     for (var i=0; i<main_links.length; i++) main_links[i].selected = false;
     d.selected = true;
@@ -136,13 +138,14 @@ function transition_to(new_state, immediately, callback) {
       }
     }
     position_hexagons(dur);
-    move_to_left(dur, function() { update_sub(sub_links, dur, cb.f);});
+    move_to_left(dur, function() { update_sub(sub_links, dur, cb.f); });
     state = 1;
   }
   else if (new_state == 2) {
     if (!active_sub_node) throw "'active_sub_node' link must be set to transition to state 2";
     var d = d3.select(active_sub_node).data()[0];
-    content = [d.content];
+    var path = d.img.split('.png')[0]+'big.png';
+    content = [path];
     // select the new sub link
     for (var i=0; i<sub_links.length; i++) sub_links[i].selected = false;
     d.selected = true;
@@ -156,7 +159,10 @@ function transition_to(new_state, immediately, callback) {
         break;
       }
     }
-    position_hexagons(dur, function() { update_content(content, dur, cb.f); });
+    position_hexagons(dur, cb.f);
+    if (state == 2) {
+      update_content(null, dur/2, function() { update_content(content, dur/2, cb.f) });
+    } else update_content(content, dur, cb.f);
     state = 2;
   }
 }
@@ -172,28 +178,30 @@ function update_content(content, dur, callback) {
     .insert("g", "g.content")
     .classed("content", true)
     .attr("transform", transform(1, x, y))
-    .attr("opacity", 0);
+    .attr("opacity", 1e-6); // don't use 0, since values will be stringified to exp-notation
+                            // which are invalid as opacity values (e.g. 1e-7)
+
+//  elem_enter.append("polygon")
+//    .classed("content", true)
+//    .attr("points", function(d) { return content_shape(a+gap/2, 10); });
+  elem_enter.append("image")
+    .attr("x", -a+2)
+    .attr("y", -274/2)
+    .attr("width", 532)
+    .attr("height", 273);
+
+  elem.select("image")
+    .attr("xlink:href", function(d) { return "imgs/" + d })
 
   elem_enter.transition()
     .duration(dur)
     .attr("opacity", 1)
     .each("end", cb.f);
-  elem_enter.append("polygon")
-    .classed("content", true)
-    .attr("points", function(d) { return content_shape(a+gap/2, 10); });
-  elem_enter.append("image")
-    .attr("x", -a+2)
-    .attr("y", -274/2)
-    .attr("width", 467)
-    .attr("height", 275);
-
-  elem.select("image")
-    .attr("xlink:href", function(d) { return "imgs/" + d })
   
   elem.exit()
     .transition()
     .duration(dur)
-    .attr("opacity", 0)
+    .attr("opacity", 1e-6)
     .remove()
     .each("end", cb.f);
 }
@@ -217,7 +225,7 @@ function update_sub(links, dur, callback) {
    .attr("points", function(d) { return hexagon(a, 0, 0); });
  
   hexes_enter.append("image")
-    .attr("xlink:href", function(d) { return "imgs/" + d.image})
+    .attr("xlink:href", function(d) { return "imgs/" + d.img})
     .attr("x", -a)
     .attr("y", -ah/2)
     .attr("width", 2*a)

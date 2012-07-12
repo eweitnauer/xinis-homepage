@@ -23,7 +23,7 @@ function init_background() {
       .attr("stop-color", "#aaa")
       .attr("stop-opacity", 1);
   
-  //addCircles(10);
+  addCircles(10);
   
   addBars(15, 15);
 }
@@ -60,7 +60,7 @@ function addCircles(N) {
     d3.select(this)
     .transition()
     .ease("linear")
-    .duration(3000)
+    .duration(1000)
     .attr("cx", function(d) {
       d.x += 3*d.dx;
       if (d.x > w) d.dx = -d.dx;
@@ -80,7 +80,7 @@ function addCircles(N) {
      .data(circles)
      .enter()
      .append("circle")
-     .attr("opacity", 0.3)
+     .attr("opacity", 0.2)
      .attr("stroke", "none")
      .attr("fill", function(d) { return d.color})
      .attr("cx", function(d) { return d.x })
