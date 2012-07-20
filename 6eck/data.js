@@ -7,10 +7,10 @@ function loadData() {
     children: ['grafik/g1.png', 'grafik/g2.png', 'grafik/g3.png', 'grafik/g4.png']
    }
   ,{label: "Illustration",
-    children: ['illustration/1.png', 'illustration/2.png', 'illustration/3.png', 'illustration/4.png', 'illustration/5.png', ]
+    children: ['illustration/1.png', 'illustration/2.png', 'illustration/3.png', 'illustration/4.png', 'illustration/5.png', 'illustration/6.png']
    }
    ,{label: "Medien",
-     children: ['medien/1.png', 'medien/2.png', 'medien/3.png', 'medien/4.png', 'medien/5.png', 'medien/6.png']
+     children: ['medien/1.png', 'medien/2.png', 'medien/3.png', 'medien/4.png', 'medien/5.png', 'medien/6.png', 'medien/7.png', 'medien/8.png']
    }];
   
   addChildren(data);
