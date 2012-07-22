@@ -11,9 +11,10 @@ div#foreground {
 }
 
 svg {
-  border: 2px solid gray;  
+/*  border: 2px solid gray;  */
   z-index: 10;
-  height: 610px;
+  width: 1200px;
+  height: 800px;
 }
 
 polygon.content {

@@ -1,31 +1,32 @@
 function init_background() {
-  var gradient = svg.append("svg:defs")
-    .append("svg:linearGradient")
-      .attr("id", "gradient")
-      .attr("x1", "50%")
-      .attr("y1", "0%")
-      .attr("x2", "50%")
-      .attr("y2", "100%")
-      .attr("spreadMethod", "pad");
+//  var gradient = svg.append("svg:defs")
+//    .append("svg:linearGradient")
+//      .attr("id", "gradient")
+//      .attr("x1", "50%")
+//      .attr("y1", "0%")
+//      .attr("x2", "50%")
+//      .attr("y2", "100%")
+//      .attr("spreadMethod", "pad");
 
-  gradient.append("svg:stop")
-      .attr("offset", "0%")
-      .attr("stop-color", "#fff")
-      .attr("stop-opacity", 1);
+//  gradient.append("svg:stop")
+//      .attr("offset", "0%")
+//      .attr("stop-color", "#fff")
+//      .attr("stop-opacity", 1);
 
-  gradient.append("svg:stop")
-      .attr("offset", "40%")
-      .attr("stop-color", "#fff")
-      .attr("stop-opacity", 1);
+//  gradient.append("svg:stop")
+//      .attr("offset", "40%")
+//      .attr("stop-color", "#fff")
+//      .attr("stop-opacity", 1);
 
-  gradient.append("svg:stop")
-      .attr("offset", "100%")
-      .attr("stop-color", "#aaa")
-      .attr("stop-opacity", 1);
-  
+//  gradient.append("svg:stop")
+//      .attr("offset", "100%")
+//      .attr("stop-color", "#aaa")
+//      .attr("stop-opacity", 1);
+
   addCircles(10);
   
-  addBars(15, 15);
+//  addBars(15, 15);
+  addBarsImg();
 }
     
 //function add_image_patterns() {
@@ -87,6 +88,16 @@ function addCircles(N) {
      .attr("cy", function(d) { return d.y })
      .attr("r", function(d) { return d.r })
      .each(move);
+}
+
+function addBarsImg() {
+  var g = svg.append("image")
+    .attr("xlink:href", "imgs/bg-stripes.png")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", w)
+    .attr("height", h)
+    .attr("opacity", 0.3);
 }
 
 function addBars(bar, gap) {

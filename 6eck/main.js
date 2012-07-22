@@ -21,7 +21,7 @@ var content = null;
 
 function init() {
   w = 1200;
-  h = 600;
+  h = 800;
   svg = d3.select("div#background")
     .append("svg")
     .attr("width", w)
