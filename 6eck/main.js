@@ -144,7 +144,7 @@ function transition_to(new_state, immediately, callback) {
   else if (new_state == 2) {
     if (!active_sub_node) throw "'active_sub_node' link must be set to transition to state 2";
     var d = d3.select(active_sub_node).data()[0];
-    var path = d.img.split('.png')[0]+'big.png';
+    var path = d.img.split('.png')[0]+'_big.png';
     content = [path];
     // select the new sub link
     for (var i=0; i<sub_links.length; i++) sub_links[i].selected = false;

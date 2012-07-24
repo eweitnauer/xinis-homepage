@@ -4,7 +4,7 @@ function loadData() {
     children: ['kunst/f1.png', 'kunst/f2.png', 'kunst/f3.png','kunst/f4.png', 'kunst/k1.png', 'kunst/k2.png', 'kunst/k3.png','kunst/k4.png']
    }
   ,{label: "Grafik",
-    children: ['grafik/g1.png', 'grafik/g2.png', 'grafik/g3.png', 'grafik/g4.png']
+    children: ['grafik/g1.png', 'grafik/g2.png', 'grafik/g3.png', 'grafik/g4.png', 'grafik/allergosan.png', 'grafik/crelo.png', 'grafik/heizung.png', 'grafik/htm.png', 'grafik/ilab.png', 'grafik/lesen.png', 'grafik/redearth.png', 'grafik/siemens.png', ]
    }
   ,{label: "Illustration",
     children: ['illustration/1.png', 'illustration/2.png', 'illustration/3.png', 'illustration/4.png', 'illustration/5.png', 'illustration/6.png']
