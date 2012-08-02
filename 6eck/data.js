@@ -1,31 +1,128 @@
 function loadData() {
   var data = 
-  [{label: "Kunst+Foto",
-    children: ['kunst/f1.png', 'kunst/f2.png', 'kunst/f3.png','kunst/f4.png', 'kunst/k1.png', 'kunst/k2.png', 'kunst/k3.png','kunst/k4.png']
-   }
-  ,{label: "Grafik",
-    children: ['grafik/g1.png', 'grafik/g2.png', 'grafik/g3.png', 'grafik/g4.png', 'grafik/allergosan.png', 'grafik/crelo.png', 'grafik/heizung.png', 'grafik/htm.png', 'grafik/ilab.png', 'grafik/lesen.png', 'grafik/redearth.png', 'grafik/siemens.png', ]
-   }
-  ,{label: "Illustration",
-    children: ['illustration/1.png', 'illustration/2.png', 'illustration/3.png', 'illustration/4.png', 'illustration/5.png', 'illustration/6.png']
-   }
-   ,{label: "Medien",
-     children: ['medien/1.png', 'medien/2.png', 'medien/3.png', 'medien/4.png', 'medien/5.png', 'medien/6.png', 'medien/7.png', 'medien/8.png']
-   }];
+  [
+  {title: "Kunst+Foto"
+  ,children:
+    [{title: ''
+     ,img: 'kunst/f1.png'
+     ,description: 'Test Test Test'}
+    ,{title: ''
+     ,img: 'kunst/f2.png'
+     ,description: 'Test Test Test'}
+    ,{title: ''
+     ,img: 'kunst/f3.png'
+     ,description: 'Test Test Test'}
+    ,{title: ''
+     ,img: 'kunst/f4.png'
+     ,description: 'Test Test Test'}
+    ,{title: ''
+     ,img: 'kunst/k1.png'
+     ,description: 'Test Test Test'}
+    ,{title: ''
+     ,img: 'kunst/k2.png'
+     ,description: 'Test Test Test'}
+    ,{title: ''
+     ,img: 'kunst/k3.png'
+     ,description: 'Test Test Test'}
+    ,{title: ''
+     ,img: 'kunst/k4.png'
+     ,description: 'Test Test Test'}
+    ]
+  },
+  {title: "Grafik"
+  ,children:
+    [{title: ''
+     ,img: 'grafik/g1.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'grafik/g2.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'grafik/g3.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'grafik/g4.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'grafik/allergosan.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'grafik/crelo.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'grafik/heizung.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'grafik/htm.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'grafik/ilab.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'grafik/lesen.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'grafik/redearth.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'grafik/siemens.png'
+     ,description: ''}
+    ]
+  },
+  {title: "Illustration"
+  ,children:
+    [{title: ''
+     ,img: 'illustration/1.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'illustration/2.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'illustration/3.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'illustration/4.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'illustration/5.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'illustration/6.png'
+     ,description: ''}
+    ]
+  },
+  {title: "Medien"
+  ,children:
+    [{title: ''
+     ,img: 'medien/1.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'medien/2.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'medien/3.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'medien/4.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'medien/5.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'medien/6.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'medien/7.png'
+     ,description: ''}
+    ,{title: ''
+     ,img: 'medien/8.png'
+     ,description: ''}
+    ]
+  }];
   
-  addChildren(data);
   addId(data);
   addI(data);
-  addKind(data);
   return data;
-}
-
-function addChildren(data) {
-  for (var i=0; i<data.length; i++) {
-    for (var j=0; j<data[i].children.length; j++) {
-      data[i].children[j] = {img: data[i].children[j]};
-    }
-  }
 }
 
 var id_counter = 0;
@@ -37,17 +134,9 @@ function addId(data) {
 }
 
 function addI(data, start_at) {
-  if (typeof(start_at) === 'undefined') start_at = 0;
+  start_at = start_at || 0;
   for (var i=0; i<data.length; i++) {
     data[i].i = start_at+i;
     if (data[i].children) addI(data[i].children, data.length);
-  }
-}
-
-function addKind(data, lvl) {
-  if (typeof(lvl) === 'undefined') lvl = 0;
-  for (var i=0; i<data.length; i++) {
-    data[i].kind = ['main', 'sub'][lvl];
-    if (data[i].children) addKind(data[i].children, lvl+1);
   }
 }

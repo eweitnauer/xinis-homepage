@@ -45,7 +45,7 @@ function init() {
    .attr("points", function(d) { return hexagon(a, 0, 0); });
 
   main.append("text")
-   .text(function(d) { return d.label; });
+   .text(function(d) { return d.title; });
   
   state = 0;
   transition_to(0, true);
@@ -144,8 +144,8 @@ function transition_to(new_state, immediately, callback) {
   else if (new_state == 2) {
     if (!active_sub_node) throw "'active_sub_node' link must be set to transition to state 2";
     var d = d3.select(active_sub_node).data()[0];
-    var path = d.img.split('.png')[0]+'_big.png';
-    content = [path];
+    d.img_big = d.img.split('.png')[0]+'_big.png';
+    content = [d];
     // select the new sub link
     for (var i=0; i<sub_links.length; i++) sub_links[i].selected = false;
     d.selected = true;
@@ -181,17 +181,26 @@ function update_content(content, dur, callback) {
     .attr("opacity", 1e-6); // don't use 0, since values will be stringified to exp-notation
                             // which are invalid as opacity values (e.g. 1e-7)
 
-//  elem_enter.append("polygon")
-//    .classed("content", true)
-//    .attr("points", function(d) { return content_shape(a+gap/2, 10); });
   elem_enter.append("image")
-    .attr("x", -a+2)
+    .attr("x", -a)
     .attr("y", -274/2)
     .attr("width", 532)
     .attr("height", 273);
 
+  elem_enter.append("foreignObject")
+    .attr("x", 0)
+    .attr("y", 274/2+10)
+    .attr("width", 532-a)
+    .attr("height", 200)
+    .append("xhtml:div")
+    .attr('class', 'description')
+    .append("xhtml:p");
+
   elem.select("image")
-    .attr("xlink:href", function(d) { return "imgs/" + d })
+    .attr("xlink:href", function(d) { return "imgs/" + d.img_big })
+
+  elem.select("div.description p")
+    .text(function(d) {return d.description});
 
   elem_enter.transition()
     .duration(dur)
