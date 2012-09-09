@@ -52,3 +52,24 @@ g.hexagon polygon.selected {
 g.hexagon polygon.selected:hover {
   fill: #888;
 }
+
+div.description {
+  background: white;
+  color: #555;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-family: Arial;
+  border: 1px solid #aaa;
+}
+
+div.description h2 {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  font-size: 1.25em;
+}
+
+div.description p {
+  margin: 0;
+  font-family: serif;
+  text-align: justify;
+}

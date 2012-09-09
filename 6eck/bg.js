@@ -23,7 +23,7 @@ function init_background() {
 //      .attr("stop-color", "#aaa")
 //      .attr("stop-opacity", 1);
 
-//  addCircles(10);
+  addCircles(10);
   
 //  addBars(15, 15);
   addBarsImg();

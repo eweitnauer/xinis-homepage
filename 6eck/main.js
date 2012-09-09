@@ -187,20 +187,22 @@ function update_content(content, dur, callback) {
     .attr("width", 532)
     .attr("height", 273);
 
-  elem_enter.append("foreignObject")
-    .attr("x", 0)
+  var div = elem_enter.append("foreignObject")
+    .attr("x", -a+78)
     .attr("y", 274/2+10)
-    .attr("width", 532-a)
+    .attr("width", 532-78)
     .attr("height", 200)
     .append("xhtml:div")
-    .attr('class', 'description')
-    .append("xhtml:p");
+    .attr('class', 'description');
+  
+  div.append("xhtml:h2")
+    .text(function(d) {return d.title});
+
+  div.append("xhtml:p")
+    .text(function(d) {return d.description});
 
   elem.select("image")
     .attr("xlink:href", function(d) { return "imgs/" + d.img_big })
-
-  elem.select("div.description p")
-    .text(function(d) {return d.description});
 
   elem_enter.transition()
     .duration(dur)
@@ -237,9 +239,9 @@ function update_sub(links, dur, callback) {
     .attr("xlink:href", function(d) { return "imgs/" + d.img})
     .attr("x", -a)
     .attr("y", -ah/2)
-    .attr("width", 2*a)
+    .attr("width", 2*a-2) // the -2 is a fix for chrome that would not display the lower broder correctly
     .attr("height", ah);
-
+  
   position_hexagons(dur, cb.f);
   
   hexes.exit()
