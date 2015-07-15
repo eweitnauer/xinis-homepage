@@ -172,7 +172,7 @@ function update_content(content, dur, callback) {
   var cb = callback instanceof OnlyFirst ? callback : new OnlyFirst(callback);
   var elem = d3.select("svg g.main").selectAll("g.content")
     .data(content);
-  var x = hexpos(a+gap,[5,0])[0]-a;
+  var x = hexpos(a+gap,[5,0])[0];//-a;
   var y = hexpos(a+gap,[5,0])[1];
   var elem_enter = elem.enter()
     .insert("g", "g.content")
@@ -231,10 +231,6 @@ function update_sub(links, dur, callback) {
     .attr("transform", transform(1, pos[0], pos[1]))
     .on("click", clicked_sub);
 
-  hexes_enter.append("polygon")
-   .classed("sub", true)
-   .attr("points", function(d) { return hexagon(a, 0, 0); });
- 
   hexes_enter.append("image")
     .attr("xlink:href", function(d) { return "imgs/" + d.img})
     .attr("x", -a)
@@ -242,6 +238,10 @@ function update_sub(links, dur, callback) {
     .attr("width", 2*a-2) // the -2 is a fix for chrome that would not display the lower broder correctly
     .attr("height", ah);
   
+  hexes_enter.append("polygon")
+   .classed("sub", true)
+   .attr("points", function(d) { return hexagon(a, 0, 0); });
+   
   position_hexagons(dur, cb.f);
   
   hexes.exit()

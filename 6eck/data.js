@@ -1,123 +1,186 @@
 function loadData() {
   var data =
   [
-  {title: "Kunst+Foto"
+  {title: "Art & Photography"
   ,children:
     [{title: ''
      ,img: 'kunst/f1.png'
-     ,description: 'Produktefotografie'}
+     ,description: 'Product Photography.'}
     ,{title: ''
      ,img: 'kunst/f2.png'
-     ,description: 'Produktefotografie'}
+     ,description: 'Product Photography.'}
     ,{title: ''
      ,img: 'kunst/f3.png'
-     ,description: 'Produktfotografie'}
+     ,description:'Product Photography.'}
     ,{title: ''
      ,img: 'kunst/f4.png'
-     ,description: 'Produktfotografie'}
+     ,description:'Product Photography.'}
     ,{title: ''
      ,img: 'kunst/k1.png'
-     ,description: 'Zeichnung mit Kohlestift'}
+     ,description: 'Carbon pencil drawing.'}
     ,{title: ''
      ,img: 'kunst/k2.png'
-     ,description: 'Stillleben-Zeichnung mit Aquarell'}
+     ,description: 'Gouache painting for still life.'}
     ,{title: ''
      ,img: 'kunst/k3.png'
-     ,description: 'Zeichnung mit Bleistift'}
+     ,description: 'Pencil drawing.'}
     ,{title: ''
      ,img: 'kunst/k4.png'
-     ,description: 'Zeichnung mit Buntstift später verwendet als zentrales Element einer Internetseite.'}
+     ,description: 'Drawing with colored pencil for webpage.'}
     ]
   },
-  {title: "Grafik"
+  {title: "Graphics"
   ,children:
     [{title: 'Allergosan'
      ,img: 'grafik/allergosan.png'
-     ,description: 'Der Buchstabe "S" wurde in Form einer Blume gestaltet, da es sich um ein biomedizinisches Produkt handelt. Die Farben sind frisch und sonnig.'}
+     ,description: 'Logo design for a biomedical company in Austria. I used the letter "S" to build a flower.'}
     ,{title: 'CreloArt'
      ,img: 'grafik/crelo.png'
-     ,description: 'CreloArt ist französisch für "kreativ". Im Sommer 2008 wurde dieses Logo für Viva Decor als Tochtermarke gestaltet.'}
+     ,description: 'CreloArt means creative in French. The logo is for a creative paint company in Switzerland.'}
     ,{title: 'Conematic Heating'
      ,img: 'grafik/heizung.png'
-     ,description: 'Logo für ein Heizungstechnologieunternehmen in Kanada. Das Logo basiert auf dem ersten Buchstaben von Conematic der in Form einer Flamme gestaltet wurde. Rot und Orange sind die Farben des Feuers.'}
+     ,description: 'This logo is for a heating technology company in Canada. The logo was build with the first letter from "Conematic" and a flame.'}
     ,{title: 'HTM GmbH'
      ,img: 'grafik/htm.png'
-     ,description: 'Logo für einen Holzhändler, der hochwertige Bäume aus Deutschland exportiert. Der grüne Baum mit blauen Streifen steht für Natur und Umwelt. Dadurch wird die Assoziation mit Holz hergestellt. Auf der rechten Seite ist ein Flyer. Die blaue Figur ist ein traditionelles chinesisches Motiv "Ru Yi" und steht für Zuverlässigkeit und Glück.'}
+     ,description: 'This logo is for a timber merchant in Germany which exported quality trees from Germany. The green tree with blue stripe stands for nature and the environment. On the right side is a flyer. The blue figure is a traditional Chinese motif, "ru yi", and stands for reliability and happiness.'}
     ,{title: 'ILabShop'
      ,img: 'grafik/ilab.png'
-     ,description: 'Logo für einen Internetversandhändler für medizinische Laborgeräte. Die blaue Farbe sthet für Sauberkeit und Professionalität. Die Punkte mit Farbeverläufen repräsentieren einen Laborversuch in abstrakter Form.'}
-    ,{title: 'Aktion Lesen'
+     ,description: 'This logo is for an Internet shopping company for medical laboratory equipment. The blue color stands for cleanliness and professionalism. The points with color gradients represent a laboratory experiment in a abstract form'}
+    ,{title: 'Plan to read'
      ,img: 'grafik/lesen.png'
-     ,description: 'Dieses Logo wurde im Jahr 1999 von der Regierung in Beijing, China in einem Wettbewerb als Sieger ausgewählt. Es wurde verwendet für ein Hilfsprogramm in dem vielen Kindern aus armen Familien Bücher geschenkt wurden, um ihnen so das Lesen zu ermöglichen. Das Logo ahmt die abstrakte Form eines Vogels nach, der mit der Kraft des Wissens emporfliegen kann. Seine Federn ähneln den Seiten eines Buchs.'}
+     ,description: 'This logo was chosen as the winner in 1999 by the government in Beijing, China. It was used for an organization, which supply opportunities to help many children from poor families to read books. The logo contains an abstract shape of a bird, symbolizing how knowledge can make you fly. The feathers are similar to the pages of book.'}
     ,{title: 'Redearth Logo'
      ,img: 'grafik/redearth.png'
-     ,description: 'Ein Logo für die asiatische Kosmetikmarke Redearth. Das Logo setzt sich aus einem Frauenkopf in Seitenperspektive und dem ersten Buchstaben des Markennamen zusammen. Die Punkte und Linie verschörern das Gesicht.'}
+     ,description: 'This logo is for an Asian cosmetics brand with the name "Red Earth". The logo was build of a woman\'s head in side view and the first letter of the brand name.'}
     ,{title: 'Siemens'
      ,img: 'grafik/siemens.png'
-     ,description: 'Das Logo mit dem Motto "One Team one Dream" wird von Siemens Mobile in Peking für die eigene Fußballmannschaft verwendet. Im Logo wurden bewegte Streifen verwendet, von denen einer den ersten Buchstaben von "Team" bildet. Die drei Streifen zusammen formen einen abstrakten Ball und stehen für den Jubel der Zuschauer.'}
-    ,{title: 'Katalog für ein Bauunternehmen'
+     ,description: 'This logo with the motto "One Team, One Dream" is used by Siemens Mobile for their own football team in Beijing. This logo forms the first letter of "team". The three strips are together forming an abstract ball and stand for the cheers of the spectators.'}
+    ,{title: 'Catalog for a construction company'
      ,img: 'grafik/g1.png'
      ,description: ''}
-    ,{title: 'Schmuckkatalog'
+    ,{title: 'Jewelry design catalog'
      ,img: 'grafik/g2.png'
-     ,description: 'Ein Fach- und Händlerkatalog. Die Fotos vom Schmuck wurden durch auffällige Steine, Kristalle oder Holz in sehr schönen Perspektiven präsentiert.  Die Schmuckteile wurden von Händen in unterschiedlichen Positionen vor einem weißen Hintergrund fotografiert. Die Hände sind leicht unscharf und verschmelzen mit dem weißen Hintergrund.'}
-    ,{title: 'Lippenstift-Plakat'
+     ,description: 'This catalog is for specialists and dealers in the jewelry market.'}
+    ,{title: 'Lipstick Poster'
      ,img: 'grafik/g3.png'
-     ,description: 'RedEarth ist eine bekannte Kosmetikmarke in Asien. Durch sehr starke Farbekontraste, abstrakte Formen und ein glänzendes Lippenfoto wurde das Lippenstiftprodukt sehr auffällig präsentiert.'}
-    ,{title: 'Mondkuchen - Verpackungsdesignserie'
+     ,description: 'Red Earth is a well-known cosmetics brand in Asia. The lipstick product was presented very noticeable by very strong contrast color, abstract shapes and a shiny lip photo.'}
+    ,{title: 'Moon cake - packaging design series'
      ,img: 'grafik/g4.png'
-     ,description: 'Dieses Unternehmen hat ein über 100 jährige Geschichte. Da es sich um ein traditionelles chinesische Fest handelt, wurde auch die Verpackung in traditioneller Form, Muster, und Farbe gestaltet. Die rote und goldene Farbe steht für Glück und Fröhlichkeit. Das Motiv aus Papierschneidekunst repräsentiert die chinesische Tradition.'}
-    ]
+     ,description: 'The company has a more than 100 years history. As this is a traditional Chinese festival, the packaging was designed with traditional form, pattern, and color. The red and golden color represents happiness and cheerfulness'}
+    ,{title: 'mattresses'
+     ,img: 'grafik/g13.png'
+     ,description: 'Logo design for Mattresses Company'}
+    ,{title: 'From Here To There'
+     ,img: 'grafik/g14.png'
+     ,description: 'Game design for the educational iPad app "From Here To There" (available in the Apple app store)'}
+    ,{title: 'Traum-Gut Matratzen'
+     ,img: 'grafik/g15.png'
+     ,description: 'CI design for Mattresses Company in Germany.'}
+    ,{title: 'Transformations'
+     ,img: 'grafik/g16.png'
+     ,description: 'Game design for Psychological and Brain Sciences department in Indiana University, USA'}
+      ,{title: 'Graspable Math'
+     ,img: 'grafik/g17.png'
+     ,description: 'CI design for Graspable Math, a company developing educational mathematics software.'}
+]
   },
   {title: "Illustration"
   ,children:
-    [{title: 'Illustration für Designkatalog'
+    [{title: 'Illustration for Design Catalog'
      ,img: 'illustration/1.png'
-     ,description: 'Illustration für das Textildesign-Kapitel des Viva-Decor Designkatalogs 2012.'}
-    ,{title: 'Illustration für Designkatalog'
+     ,description: 'Illustration for the textile design section of Viva Decor Design catalog 2012.'}
+    ,{title: 'Illustration for Design Catalogue'
      ,img: 'illustration/2.png'
-     ,description: 'Illustration für das Schmuck-Kapitel des Viva-Decor Designkatalogs 2012.'}
-    ,{title: 'Illustration für Designkatalog'
+     ,description: 'Illustration for the jewelry section of Viva Decor Design catalog 2012.'}
+    ,{title: 'Illustration for Design Catalogue'
      ,img: 'illustration/3.png'
-     ,description: 'Illustration für das Kerzen-Kapitel des Viva-Decor Designkatalogs 2012.'}
-    ,{title: 'Illustration für Designkatalog'
+     ,description: 'Illustration for the Candle chapter of Viva Decor Design catalog 2012.'}
+    ,{title: 'Illustration for Design Catalogue'
      ,img: 'illustration/4.png'
-     ,description: 'Illustration für das Home-Decoration-Kapitel des Viva-Decor Designkatalogs 2012.'}
-    ,{title: 'Illustration für Designkatalog'
+     ,description: 'Illustration for Home Decoration-section of Viva Decor Design catalog 2012.'}
+    ,{title: 'Illustration for Design Catalogue'
      ,img: 'illustration/5.png'
-     ,description: 'Illustration für das Wandgestaltung-Kapitel des Viva-Decor Designkatalogs 2012.'}
-    ,{title: 'Illustration für Verpackungsdesign'
+     ,description: 'Illustration for the wall design-section of Viva Decor Design catalog 2012.'}
+    ,{title: 'Illustration for packaging design'
      ,img: 'illustration/6.png'
-     ,description: 'Verpackungsdesign für eine Viva-Decor Textilfarbe.'}
+     ,description: 'Packaging Design for fabric design.'}
+     ,{title: 'Illustration for Graspable Math'
+     ,img: 'illustration/7.png'
+     ,description: 'Image for Graspable Math web presence.'}
+     ,{title: 'Illustration for Graspable Math'
+     ,img: 'illustration/8.png'
+     ,description: 'Image for Graspable Math web presence.'}
+     ,{title: 'Illustration for Graspablemath'
+     ,img: 'illustration/9.png'
+     ,description: 'Image for Graspable Math web presence.'}
+     ,{title: 'Illustration for Graspablemath'
+     ,img: 'illustration/10.png'
+     ,description: 'Image for Graspable Math web presence.'}
+     ,{title: 'Experiment design for Psychological and Brain Sciences department in Indiana University.'}
+     ,img: 'illustration/11.png'
+     ,description: 'Experiment design – stimuli for eye tracking category-learning experiments.'}
+     ,{title: 'Experiment design for Psychological and Brain Sciences department in Indiana University.'}
+     ,img: 'illustration/12.png'
+     ,description: 'Experiment design – stimuli for eye tracking category-learning experiments.'}
+     ,{title: 'experments design for Psychological and Brain Sciences department in IU '
+     ,img: 'illustration/13.png'
+     ,description: 'Experiment design – stimuli for eye tracking category-learning experiments.'}
+     ,{title: 'experments design for Psychological and Brain Sciences department in IU'
+     ,img: 'illustration/14.png'
+     ,description: 'Experiment design – stimuli for eye tracking category-learning experiments.'}
+     ,{title: 'Illustration for game - Transformations'
+     ,img: 'illustration/15.png'
+     ,description: 'Game design for Psychological and Brain Sciences department in Indiana University.'}
     ]
   },
   {title: "Medien"
   ,children:
-    [{title: 'Schmuckrezepte'
+    [{title: 'Jewelry Design Recipes'
      ,img: 'medien/1.png'
-     ,description: 'Es handelt sich 10 selbst gestaltet Schmuck. Schmuckzeichnung mit natürlicher Fotografie  ist das wesentliche gestalterische Konzept von diesem Buch. Zu diesem Buch haben wir noch ein DVD mit 3 Filmen für die Kunden vorbereitet. Mit diesem Buch und DVD kann die Kunden sehr schnell eignes Schmuck kreativeren.'}
-    ,{title: 'Story of a Jazzpiano'
+     ,description: 'I created this booklet to show how to make ten different pieces of jewelry yourself. Hand pencil drawing combined with photography is the essential design concept for this book. For this book, we made a DVD with three movies for our clients. With the book and DVD customers can quickly learn how to make jewelry by themselves.'}
+    ,{title: 'Story of a Jazz Piano'
      ,img: 'medien/2.png'
-     ,description: 'Das Konzert ist kombiniert mit Interviews der drei Musiker, einem Kapitel über die geschichtliche Entwicklung der Instrumente und mit Berichten über die jeweils wichtigsten Jazz-Pianisten aus der Zeit des Jazz. DVD wurde mit Zeichnungs-Stil darstellt. Sowohl Moderne als auch Tradition. Es ist einer junge Unternehmen, der mit junge und Kreative Team in dieser Branche sehr schnell aufgewachsen ist. Um den Unternehmen Bekannt, Stabil zu machen, ist ein aufgefallenes einheitliches Outfit  sehr wichtig. Rot und schwarz Farbe unterscheidet die anderen Firmen in dieser Branche. [Gruppenarbeit 2005]'}
+     ,description: 'The concert is combined with interviews of the three musicians, a chapter on the historical development of instruments and reports on each major jazz pianist from the era of Jazz. The DVD booklet was created in drawing style. (Group work in 2005)'}
     ,{title: ''
      ,img: 'medien/3.png'
-     ,description: 'Webdesign für eine SportTV Interseite'}
+     ,description: 'Web Design for Sport TV'}
     ,{title: ''
      ,img: 'medien/4.png'
-     ,description: 'Webseite für Allergosan in Wien'}
-    ,{title: 'Projekt Polarstation'//Polar-Station DFP Programm
+     ,description: 'Web Design for Allergosan in Austria'}
+    ,{title: 'Project Polar station'//Polar-Station DFP Programm
      ,img: 'medien/5.png'
-     ,description: 'Design einer Lernsoftware zur Senkung des Blutdrucks. Das Thema Polarstation wurde wegen seiner Assoziation mit Kälte, Schnee und Ruhe gewählt.'}
+     ,description: 'Design for educational software for lowering blood pressure. The theme was chosen because of its polar station associated with cold, snow and peace'}
     ,{title: 'Phaenomedial'
      ,img: 'medien/6.png'
-     ,description: 'Design einer interaktiven mobilen Applikaton für das Entdecken und Navigieren im Pheano-Museum in Worfsburg. Mit Hilfe von mobilen Endgeräten (PDA, Smartphone, Handheld) können die Besucher vordefinierte Experimentierpfade auswählen und detaillierte Informationen zu den einzelnen Experimentierstationen erhalten.'}
+     ,description: 'Design of an interactive mobile application for discovering and navigating the Pheano Museum in Worfsburg, Germany. With the help of mobile devices (PDA, smartphone, handheld), visitors can select predefined experimental paths and obtain detailed information about each experiment station.'}
     ,{title: 'Webseite von Servier Science Center'
      ,img: 'medien/7.png'
-     ,description: 'Designvorschlag für den Internetauftritt von Servier Science Center in Wien.'}
-    ,{title: 'Webseite von Viva Decor GmbH'
+     ,description: 'Design proposal for the website of Servier Science Center in Vienna.'}
+    ,{title: 'Webpage for Viva Decor GmbH'
      ,img: 'medien/8.png'
-     ,description: 'Design und Umsetzung des kompletten Webauftritts von Viva Decor, einem mittelständigen Kreativfarbhersteller in Deutschland.'}
-    ]
+     ,description: 'Design and implementation of the complete web presence of Viva Decor, a medium-sized creative paint manufacturer in Germany.'}
+    ,{title: 'Game Desgin - Transformations.'
+     ,img: 'medien/9.png'
+     ,description: 'Game design for Psychological and Brain Sciences department in Indiana University.'}
+     ,{title: 'Game Desgin - From Here To There.'
+     ,img: 'medien/10.png'
+     ,description: '"From Here To There" is a self-paced interactive application that introduces students to mathematical content through discovery-based puzzles.'}
+    ,{title: 'Interface Desgin - From Here To There.'
+     ,img: 'medien/11.png'
+     ,description: '"From Here To There" is a self-paced interactive application that introduces students to mathematical content through discovery-based puzzles.'}
+    ,{title: 'Interface Desgin - Transformations.'
+     ,img: 'medien/12.png'
+     ,description: 'The players take the role of an alchemist that helps people by transforming old objects into new objects'}
+     ,{title: 'Website Design'
+     ,img: 'medien/13.png'
+     ,description: 'Webpage Design for Prof. David Landy – “LabGebra”'}
+     ,{title: 'Webpage Desgin and video productions - viva decor.'
+     ,img: 'medien/14.png'
+     ,description: 'Webpage design and video productions for Viva Decor'}
+     ,{title: 'Webpage Desgin Graspable Math.'
+     ,img: 'medien/15.png'
+     ,description: 'Webpage design for Graspable Math (www.graspablemath.com)'}
+  ]
   }];
   
   addId(data);

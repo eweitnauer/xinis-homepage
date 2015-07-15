@@ -23,7 +23,7 @@ function init_background() {
 //      .attr("stop-color", "#aaa")
 //      .attr("stop-opacity", 1);
 
-  addCircles(10);
+  //addCircles(10);
   
 //  addBars(15, 15);
   addBarsImg();
@@ -92,7 +92,8 @@ function addCircles(N) {
 
 function addBarsImg() {
   var g = svg.append("image")
-    .attr("xlink:href", "imgs/bg-stripes.png")
+
+    .attr("xlink:href", "imgs/bg1.jpg")
     .attr("x", 0)
     .attr("y", 0)
     .attr("width", w)
